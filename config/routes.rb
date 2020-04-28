@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   # verb 'path', to: 'controller#aciton'
   get '/books', to: 'books#index'
   # => When you receive a GET request to the /book path, go to the BooksController class and run the index action
+
+  get '/books/:id', to: "books#show"
 end
