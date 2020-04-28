@@ -10,6 +10,22 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <section class="title"><h1>Ada Books</h1></section>
+      <nav> 
+        <ul>
+        <li><a href="/">Home</a></li>
+          <li><a href="/books">Books list</a></li>
+          <li>New Book</i>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <p>All rights reserved</p>
+    </footer>
+    
   </body>
 </html>
