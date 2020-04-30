@@ -2,8 +2,29 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # verb 'path', to: 'controller#aciton'
-  get '/books', to: 'books#index'
+
+  # <1. Add routes that have to do with the collection of books>
+  get '/books', to: 'books#index', as: 'books'
   # => When you receive a GET request to the /book path, go to the BooksController class and run the index action
 
-  get '/books/:id', to: "books#show"
+  # Gets a form for a new book 
+  get '/books/new', to: 'books#new', as: 'new_book' 
+
+  
+  # Create abook
+  post '/books', to: 'books#create' # I don't need to a nick name since I have the path, 'books' above for the same path
+
+  
+
+  # <2. Routes that deal with a specific Book>
+  get '/books/:id', to: "books#show", as: 'book'
+
+  # Brings up the form to edit a book
+  get '/books/:id/edit', to: 'books#edit', as: 'edit_book'
+
+  # update an existing book
+  patch '/books/:id', to: 'books#update' # Don't need a nick name since we have the nick name for the same path above (line 16)
+
+  # destroy a given book
+  delete '/books/:id', to: 'books#destroy'
 end
