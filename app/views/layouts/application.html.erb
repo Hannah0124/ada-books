@@ -11,12 +11,14 @@
 
   <body>
     <header>
-      <section class="title"><h1>Ada Books</h1></section>
+      <h1>Welcome to Ada Books</h1>
       <nav> 
         <ul>
-        <li><a href="/">Home</a></li>
-          <li><a href="/books">Books list</a></li>
-          <li>New Book</i>
+          <li><a href="/">Home</a></li>
+          <li><a href="<%= books_path %>">Book list</a></li>
+          <li><a href="<%= new_book_path %>">Add a book</a></li>
+          <li> <%= link_to "Create a book", new_book_path %></li>  <%# another way%>
+          
         </ul>
       </nav>
     </header>
