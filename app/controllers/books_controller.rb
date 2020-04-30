@@ -21,4 +21,19 @@ class BooksController < ApplicationController
     end 
 
   end
+
+  def update 
+  end 
+
+  def edit 
+  end 
+
+  def destroy 
+  end
+
+  def new 
+  end
+
+  def create
+  end
 end
