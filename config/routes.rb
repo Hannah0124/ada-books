@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   get '/books', to: 'books#index', as: 'books'
   # => When you receive a GET request to the /book path, go to the BooksController class and run the index action
 
-  # Gets a form for a new book 
+  # Gets a form for a new book  (new should be above of /books/:id path due to orders) => orders matter!
   get '/books/new', to: 'books#new', as: 'new_book' 
 
-  
+
   # Create abook
   post '/books', to: 'books#create' # I don't need to a nick name since I have the path, 'books' above for the same path
 
@@ -27,4 +27,8 @@ Rails.application.routes.draw do
 
   # destroy a given book
   delete '/books/:id', to: 'books#destroy'
+
+
+  # custom (The book that you've read) => create my own method
+  patch '/books/:id/mark_read', to: 'books#mark_read', as: "book_read"
 end
