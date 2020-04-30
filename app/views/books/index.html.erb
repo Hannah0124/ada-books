@@ -1,16 +1,26 @@
 <h1>Books#index</h1>
 <p>Find me in app/views/books/index.html.erb</p>
 
-<h2>Books</h2>
+<h2>Book List</h2>
 
 <% if @books.length > 0 %>
   <ul>
     <% @books.each do |book| %> 
       <li>
-        <%= book.title %> By: <%= book.author %>
+        <%= link_to book.title, book_path(book) %> 
+        By: <%= book.author %>
+        <%= link_to "Edit Book", edit_book_path(book) %>
       </i>
     <% end %>
+
+    <%# save images at App > assets > images %>
+    <%= image_tag "dog.jpg", alt: 'The happest shiba' %>
   </ul>
 <% else %> 
   <h3>No books in the system!</h3>
 <% end %>
+
+<%= link_to "Add Book", new_book_path %>
+
+
+

@@ -1,1 +1,25 @@
 <h2>New Page</h2>
+<%= form_with model: @book, class: 'create-book' do |f| %>
+  
+  <p>Please provide the following information to save your book to our database:</p>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :author %>
+  <%= f.text_field :author %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit "Save Book", class: "book-button"%>
+<% end %>
+
+
+<%# createing forms without a model %>
+<%= form_with url: "/search", method: :get do |f| %>
+  <p>What are you looking for?</p>
+  <%= f.label :term, "Search Term" %>
+  <%= f.text_field :term %>
+
+  <%= f.submit "Search", class: "butotn search" %>
+<% end %>
