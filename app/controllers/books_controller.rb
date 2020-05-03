@@ -52,18 +52,37 @@ class BooksController < ApplicationController
     end 
   end 
 
+
   def destroy 
+    book_id = params[:id]
+    @book = Book.find_by(id: book_id) # I can indicate 'attribute'
+    # @book = Book.find(book_id) # => this is always for id
+
+    if @book.nil? 
+      head :not_found 
+      return
+    end 
+
+    @book.destory 
+
+    redirect_to books_path
   end
+
 
   def new 
     @book = Book.new
-    # @book.title = "default title"
+    # @book.title = "Alice in wonderland"
     # @book.save
   end
 
   def create
+    # raise
     # Instantiate a new book
-    @book = Book.new(author: params[:book][:author], title: params[:book][:title], description: params[:book][:description])
+    @book = Book.new(
+      author: params[:book][:author], 
+      title: params[:book][:title], 
+      description: params[:book][:description]
+      )
 
     # if save returns true, the database insert succeeds? 
     if @book.save 
@@ -72,8 +91,27 @@ class BooksController < ApplicationController
       return 
     else # save failed :( 
       # show the new book form view again
-      render :new 
+      render :new, :bad_request 
       return 
     end
+  end
+
+  def update 
+    @book = Book.find_by(id: params[:id])
+    if @book.nil? 
+      head :not_found 
+      return 
+    elsif @book.update(
+      author: params[:book][:author],
+      title: params[:book][:title],
+      description: params[:book][:description]
+    )
+
+    redirect_to books_path  # go to the index so we can see the book in the list 
+    return 
+    else # save failed :( 
+      render :edit 
+      return 
+    end 
   end
 end
