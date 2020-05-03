@@ -51,7 +51,35 @@ describe BooksController do
   end
 
 
-  describe "update" do 
+  describe "create action" do
+    it "can create a book (database)" do
+      book_hash = {
+        book: {
+          title: "Practical Object Oriented Programming in Ruby",
+          author: "Sandi Metz",
+          description: 'A look at how to design object-oriented systems'
+        }
+      }
+
+      expect {
+        post books_path, params: book_hash
+      }.must_differ 'Book.count', 1
+  
+      must_redirect_to books_path
+
+      expect(Book.last.title).must_equal book_hash[:book][:title]
+      expect(Book.last.author).must_equal book_hash[:book][:author]
+      expect(Book.last.description).must_equal book_hash[:book][:description]
+
+    end
+
+    it "will not create a book with invalid params" do
+        # fill this in when we implement validations next week
+    end
+  end
+
+
+  describe "update action" do 
     before do 
       Book.create(title: "We're all wonders", author: " R.J. Palacio", description: "Good kids book")
     end
@@ -70,7 +98,7 @@ describe BooksController do
       id = Book.first.id
       expect {
         patch book_path(id), params: new_book_hash
-      }.wont_change "Book.count"
+      }.wont_change "Book.count" # Since we just modified, count won't change
 
       must_redirect_to books_path 
 
@@ -90,9 +118,9 @@ describe BooksController do
       must_respond_with :not_found
     end
 
-    # it "will not update if the params are invalid" do
-    #   # This test will be examined when we cover validations next week
-    # end
+    it "will not update if the params are invalid" do
+      # This test will be examined when we cover validations next week
+    end
 
   end
 end
