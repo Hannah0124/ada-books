@@ -2,16 +2,22 @@
 <%= form_with model: @book, class: 'create-book' do |f| %>
   
   <p>Please provide the following information to save your book to our database:</p>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
 
-  <%= f.label :author %>
-  <%= f.text_field :author %>
+  <div>
+    <%= f.label :author %>
+    <%= f.text_field :author %>
+  </div>
 
-  <%= f.label :description %>
-  <%= f.text_field :description %>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
 
-  <%= f.submit "Save Book", class: "book-button"%>
+  <%= f.submit "Save Book", class: "book-button" %>
 <% end %>
 
 
