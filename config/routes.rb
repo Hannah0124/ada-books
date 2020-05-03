@@ -1,7 +1,7 @@
 
 Rails.application.routes.draw do
-  root to: "bookx#index"
-  
+  root to: "books#index"
+
   resources :books #index, create, new, show, update, destroy, edit
 end
 
@@ -13,7 +13,7 @@ end
 
 #   # verb 'path', to: 'controller#aciton'
 
-#   root to: "bookx#index"
+#   root to: "books#index"
 
 #   # <1. Add routes that have to do with the collection of books>
 #   get '/books', to: 'books#index', as: 'books'
