@@ -63,7 +63,7 @@ class BooksController < ApplicationController
       return
     end 
 
-    @book.destory 
+    @book.destroy 
 
     redirect_to books_path
   end
@@ -75,23 +75,27 @@ class BooksController < ApplicationController
     # @book.save
   end
 
+
   def create
     # raise
     # Instantiate a new book
-    @book = Book.new(
-      author: params[:book][:author], 
-      title: params[:book][:title], 
-      description: params[:book][:description]
-      )
+    # @book = Book.new(
+    #   author: params[:book][:author], 
+    #   title: params[:book][:title], 
+    #   description: params[:book][:description]
+    #   )
+
+    # same as above
+    @book = Book.new(book_params)
 
     # if save returns true, the database insert succeeds? 
     if @book.save 
       # go to the index so we can see the book in the list
-      redirect_to books_path 
+      redirect_to root_path
       return 
     else # save failed :( 
       # show the new book form view again
-      render :new, :bad_request 
+      render :new, :bad_request # show the new book from view again
       return 
     end
   end
@@ -113,5 +117,13 @@ class BooksController < ApplicationController
       render :edit 
       return 
     end 
+  end
+
+  private 
+
+  def book_params 
+    #  require(highest-level param).permit(specific params)
+    return params.require(:book).permit(:author, :title, :description)
+
   end
 end
