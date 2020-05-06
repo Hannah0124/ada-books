@@ -123,7 +123,7 @@ class BooksController < ApplicationController
 
   def book_params 
     #  require(highest-level param).permit(specific params)
-    return params.require(:book).permit(:author, :title, :description)
+    return params.require(:book).permit(:title, :description, :author_id)
 
   end
 end
