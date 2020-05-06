@@ -1,16 +1,18 @@
 <h2>Edit Page</h2> 
 
-<%= form_with model: @book, class: 'create-book' do |f| %>
-  <p>Please provide the following information to edit your book in our database:</p>
+<%= render partial: "form", locals: { action_name: "Edit" } %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+<%# form_with model: @book, class: 'create-book' do |f| %>
+  <%# <p>Please provide the following information to edit your book in our database:</p> %>
 
-  <%= f.label :author %>
-  <%= f.text_field :author %>
+  <%# f.label :title %>
+  <%# f.text_field :title %>
 
-  <%= f.label :description %>
-  <%= f.text_field :description %>
+  <%# f.label :author %>
+  <%# f.text_field :author %>
 
-  <%= f.submit "Edit Book", class: "book-button" %>
-<% end %>
+  <%# f.label :description %>
+  <%# f.text_field :description %>
+
+  <%# f.submit "Edit Book", class: "book-button" %>
+<%# end %>
