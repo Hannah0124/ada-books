@@ -2,7 +2,15 @@
 Rails.application.routes.draw do
   root to: "books#index"
 
+  resources :authors do 
+    resources :books, only: [:index, :new]
+  end
+
   resources :books #index, create, new, show, update, destroy, edit
+
+  # reference: https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/08-rails/model-logic.md 
+
+  resources :authors, only: [:index, :show]
 end
 
 
