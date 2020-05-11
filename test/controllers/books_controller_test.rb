@@ -56,7 +56,7 @@ describe BooksController do
       book_hash = {
         book: {
           title: "Practical Object Oriented Programming in Ruby",
-          author: "Sandi Metz",
+          author_id: "Sandi Metz",
           description: 'A look at how to design object-oriented systems'
         }
       }

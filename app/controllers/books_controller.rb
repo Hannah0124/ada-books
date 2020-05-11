@@ -7,7 +7,13 @@
 
 class BooksController < ApplicationController
   def index 
-    @books = Book.all
+    if params[:author_id] 
+      # now the book has access to the @author
+      @author = Author.find_by(id: params[:author_id])
+      @books = @author.books 
+    else 
+      @books = Book.all
+    end
   end 
 
   def show 
@@ -70,7 +76,12 @@ class BooksController < ApplicationController
 
 
   def new 
-    @book = Book.new
+    if params[:author_id] 
+      author = Author.find_by(id: params[:author_id])
+      @book = author.books.new
+    else 
+      @book = Book.new
+    end
     # @book.title = "Alice in wonderland"
     # @book.save
   end
