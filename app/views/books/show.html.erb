@@ -2,6 +2,16 @@
   <h1><%= @book.title %></h1>
   <h2>By: <%= @book.author.name %></h2>
   <p><%= @book[:description] %></p>
+  <p>Genres: </p>
+  <ul>
+    <% @book.genres.each do |genre| %> 
+      <li>
+        <%= genre.name %>
+      </li>
+    <% end %>
+  </ul>
+
+
   <%= link_to "Edit", edit_book_path(@book) %>
   <%= link_to "Delete", book_path(@book), method: :delete, date: {confirm: "Are you sure?" } %>
 </div>

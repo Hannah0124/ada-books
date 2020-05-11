@@ -1,14 +1,30 @@
+<% if @book.errors.any? %> 
+  <ul>
+    <% @book.errors.each do |column, message| %>
+      <li>
+        <%= column %>
+        <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model: @book, class: 'create-book' do |f| %>
-  <p>Please provide the following information to <%= action_name %> your book in our database:</p>
+  <p>Please provide the following information to edit your book in our database:</p>
 
   <%= f.label :title %>
   <%= f.text_field :title %>
 
   <%= f.label :author %>
-  <%= f.select :author_id,  Author.all.map { |auth| [auth.name, auth.id] } %>
+  <%= f.select :author_id, Author.all.map{ |auth| [auth.name, auth.id] } %>
 
   <%= f.label :description %>
   <%= f.text_field :description %>
 
-  <%= f.submit action_name, class: "book-button" %>
+  <div>
+    <%= f.label :genres %>
+    <%= collection_check_boxes(:book, :genre_ids, Genre.all, :id, :name) %>
+  </div>
+
+  <%= f.submit "#{action_name} Book", class: "book-button" %>
 <% end %>
