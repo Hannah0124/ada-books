@@ -16,7 +16,9 @@
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="<%= books_path %>">Book list</a></li>
-          <li><a href="<%= new_book_path %>">Add a book</a></li>
+          <li><%= link_to "New Book", new_book_path %></li>
+          <li><a href="<%= authors_path %>">Author list</a></li>
+          <li><%= link_to "New Author", new_author_path  %></li>
           <li> <%= link_to "Create a book", new_book_path %></li>  <%# another way%>
           
         </ul>
