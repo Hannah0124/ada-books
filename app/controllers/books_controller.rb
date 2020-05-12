@@ -28,51 +28,6 @@ class BooksController < ApplicationController
 
   end
 
-  def update 
-    @book = Book.find_by(id: params[:id]) 
-
-    if @book.nil? 
-      head :not_found 
-      return 
-    elsif @book.update(
-      author: params[:book][:author],
-      title: params[:book][:title],
-      description: params[:book][:description]
-      )
-
-      # go to the index so we can see the book in the list
-      redirect_to books_path 
-      return 
-    else # save failed :(
-      render :edit  # show the new book form view again
-      return 
-    end 
-  end 
-
-  def edit 
-    @book = Book.find_by(id: params[:id]) 
-
-    if @book.nil? 
-      head :not_found 
-      return 
-    end 
-  end 
-
-
-  def destroy 
-    book_id = params[:id]
-    @book = Book.find_by(id: book_id) # I can indicate 'attribute'
-    # @book = Book.find(book_id) # => this is always for id
-
-    if @book.nil? 
-      head :not_found 
-      return
-    end 
-
-    @book.destroy 
-
-    redirect_to books_path
-  end
 
 
   def new 
@@ -111,30 +66,54 @@ class BooksController < ApplicationController
     end
   end
 
+
+  def edit 
+    @book = Book.find_by(id: params[:id]) 
+
+    if @book.nil? 
+      head :not_found 
+      return 
+    end 
+  end 
+
   def update 
     @book = Book.find_by(id: params[:id])
     if @book.nil? 
       head :not_found 
       return 
-    elsif @book.update(
-      author: params[:book][:author],
-      title: params[:book][:title],
-      description: params[:book][:description]
-    )
+    elsif @book.update(book_params)
 
-    redirect_to books_path  # go to the index so we can see the book in the list 
-    return 
+      redirect_to books_path  # go to the index so we can see the book in the list 
+      return 
     else # save failed :( 
       render :edit 
       return 
     end 
   end
 
+
+  def destroy 
+    book_id = params[:id]
+    @book = Book.find_by(id: book_id) # I can indicate 'attribute'
+    # @book = Book.find(book_id) # => this is always for id
+
+    if @book.nil? 
+      head :not_found 
+      return
+    end 
+
+    @book.destroy 
+
+    redirect_to books_path
+  end
+
+  
+
   private 
 
   def book_params 
     #  require(highest-level param).permit(specific params)
-    return params.require(:book).permit(:title, :description, :author_id)
+    return params.require(:book).permit(:title, :description, :author_id, genre_ids: [])
 
   end
 end
