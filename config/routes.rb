@@ -2,13 +2,18 @@
 Rails.application.routes.draw do
   root to: "books#index"
 
+  get "/login", to: "users#login_form", as: "login"
+  post "/login", to: "users#login"
+  post "/logout", to: "users#logout", as: "logout"
+  get "/users/current", to: "users#current", as: "current_user"
+
   resources :books #index, create, new, show, update, destroy, edit
 
   resources :authors do 
     resources :books, only: [:index, :new]
   end
 
-  
+
 
   # reference: https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/08-rails/model-logic.md 
 

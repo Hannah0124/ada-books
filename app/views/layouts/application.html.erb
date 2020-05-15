@@ -20,9 +20,24 @@
           <li><a href="<%= authors_path %>">Author list</a></li>
           <li><%= link_to "New Author", new_author_path  %></li>
           <li> <%= link_to "Create a book", new_book_path %></li>  <%# another way%>
+
+          <%# if @user.nil? %> 
+          <% if session[:user_id] %> 
+            <li><%= link_to "Logout", logout_path, method: :post %></li>
+          <% else %> 
+            <li><%= link_to "Log in", login_path %></li>
+          <% end %>
           
         </ul>
       </nav>
+      <section class="flash-msg__section">
+        <% flash.each do |name, message| %>
+          <strong class="<%= name %>">
+            <%= message %>
+          </strong>
+        <% end %>
+      </section>
+
     </header>
     <main>
       <%= yield %>
