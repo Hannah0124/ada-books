@@ -56,15 +56,27 @@ class BooksController < ApplicationController
 
     # if save returns true, the database insert succeeds? 
     if @book.save 
+      flash[:sucess] = "#{@book.title} was successfully added!"
+
       # go to the index so we can see the book in the list
-      redirect_to root_path
+      redirect_to root_path 
       return 
     else # save failed :( 
+      flash.now[:error] = "#{@book.title} was not successfully added :("
+      # If I used 'flash.now', and when I go to a new page, it doesnt' stay! 
+      # rule: when I use 'render', I need to use 'flash.now' otherwise you can use plain 'flash'
+
+      # flash[:error] = "#{@book.title} # same as above 
+
       # show the new book form view again
-      render :new, :bad_request # show the new book from view again
+
+      # render is not making a new request (important!)
+      render :new, status: :bad_request # show the new book from view again
       return 
     end
   end
+
+  # reference - flesh: https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/master/09-intermediate-rails/flash.md
 
 
   def edit 

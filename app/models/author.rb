@@ -1,5 +1,6 @@
 class Author < ApplicationRecord
   validates :name, presence: true, uniqueness: true
+  # validates :bio_url, presence: true
 
   has_many :books
   has_many :genres, -> { distinct }, through: :books
